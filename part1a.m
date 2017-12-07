@@ -8,7 +8,7 @@
 
 % clear workspace and close all figures
 close all;
-clear;
+clearvars -except MCexperiments;
 
 save_folder = 'results/no_noise/';
 save_str = [datestr(now,'dd-mm-yy','local'),'_',datestr(now,'hh-MM-ss','local')];
@@ -23,7 +23,6 @@ reliable_sensors_list = [6 8 10 12 14]; % Number of consistent sensors
 delta = 1e-6; % Concave approximation related constant
 threshold = 1e-4; % Threshold to recover reliable sensors
 methods = 4; % Methods being studied ( LS, l1, P1, P2(1) )
-MCexperiments = 5; % Number of Monte Carlo experiments
 
 % save results
 results = zeros(methods, length(reliable_sensors_list));

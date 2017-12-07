@@ -8,7 +8,7 @@
 
 % clear workspace and close all figures
 close all;
-clear;
+clearvars -except MCexperiments;
 
 save_folder = 'results/noise/';
 save_str = [datestr(now,'dd-mm-yy','local'),'_',datestr(now,'hh-MM-ss','local')];
@@ -21,7 +21,6 @@ m = 4; % Size of observation vectors b
 n = 20; % Size of unknown vector x
 s = 14; % Number of consistent sensors
 delta = 1e-6; % Concave approximation related constant
-MCexperiments = 1; % Number of Monte Carlo experiments
 methods = 4; % Methods being studied (LS, l1, P1, P2(1) )
 SNR = [5 10 15 20 25]; % SNR wanted 
 noise_levels_sigma = (10.^(-SNR/20));
@@ -92,7 +91,7 @@ semilogy(results_mse, '.-', 'MarkerSize',20, 'LineWidth', 1.5)
 title('MSE variation with SNR')
 xlabel('SNR [dB]')
 ylabel('MSE')
-legend('LS', 'L_1', 'P_1', 'P_2(1)');
+legend('LS', 'L_1', 'P_1', 'P_2(1)', 'Location', 'southwest');
 ax = gca;
 ax.XTick = [1 2 3 4 5];
 ax.XTickLabel = SNR;
