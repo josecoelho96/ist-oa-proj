@@ -75,3 +75,20 @@ for s_index = 1:length(reliable_sensors_list)
         results(4, s_index) = results(4, s_index) + isequal(reliable_sensors, results_p2_1);
     end
 end
+
+results = (results./MCexperiments).*100;
+
+% Print results
+f = figure('Position',[440 500 500 140]);
+% Create the column and row names in cell arrays 
+cnames = {'s=6','s=8','s=10', 's=12', 's=14'};
+rnames = {'LS','L1','P1', 'P2(1)'};
+
+% Create the uitable
+t = uitable(f,'Data',results,...
+            'ColumnName',cnames,... 
+            'RowName',rnames);
+
+% Set width and height
+t.Position(3) = t.Extent(3);
+t.Position(4) = t.Extent(4);
