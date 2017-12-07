@@ -37,3 +37,6 @@ A = reshape(C, [], size(Ai, 2), 1);
 
 % LS method
 x_ls = ls_method(A, b, n);
+
+% l1 method
+x_l1 = l1_method(A, b, n);
