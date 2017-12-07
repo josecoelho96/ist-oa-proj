@@ -8,3 +8,6 @@
 
 % Part1 : simulations without noise
 part1a
+
+% Part1 : simulations with noise
+part1a
