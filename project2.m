@@ -15,6 +15,7 @@ k = 16; % Number of sensors
 m = 4; % Size of observation vectors b
 n = 20; % Size of unknown vector x
 s = 6; % Number of consistent sensors
+delta = 1e-6; % Concave approximation related constant
 
 % unknown vector is modeled as x0 ~ N(0, n^(-1/2)In)
 x0 = mvnrnd(zeros(1, n), n^(-0.5)*eye(n))';
@@ -43,3 +44,6 @@ x_l1 = l1_method(A, b, n);
 
 % P1 method
 x_p1 = p1_method(Ai, bi, n, k);
+
+% P2(1) method 
+x_p2_1 = p2_1_method(Ai, bi, n, k, x_p1, delta);
