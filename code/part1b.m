@@ -25,14 +25,8 @@ methods = 4; % Methods being studied (LS, l1, P1, P2(1) )
 SNR = [5 10 15 20 25]; % SNR wanted 
 noise_levels_sigma = (10.^(-SNR/20));
 
-
-% save results
-% save all norm(x-x0)^2 for a given SNR value
-results_noise = zeros(MCexperiments, methods);
 % save all MSE values for all methods
 results_mse = zeros(length(noise_levels_sigma), methods);
-%preallocations
-bi = zeros(m, 1, k);
 
 fprintf('Realizing %d Monte Carlo simulations with noise.\n', MCexperiments);
 
@@ -42,7 +36,10 @@ for noise_index = 1:length(noise_levels_sigma)
     
     fprintf('Considered SNR: %d. ', SNR(noise_index));
     toc;
-    for j=1:MCexperiments
+    parfor j=1:MCexperiments
+
+        %preallocations
+        bi = zeros(m, 1, k);
 
         % unknown vector is modeled as x0 ~ N(0, n^(-1/2)In)
         x0 = mvnrnd(zeros(1, n), n^(-0.5)*eye(n))';
@@ -68,23 +65,26 @@ for noise_index = 1:length(noise_levels_sigma)
         
         % LS method
         x_ls = ls_method(A, b, n);
-        results_noise(j, 1) = norm(x0-x_ls)^2;
+        results_noise_ls(j, noise_index) = norm(x0-x_ls)^2;
         
         % l1 method
         x_l1 = l1_method(A, b, n);
-        results_noise(j, 2) = norm(x0-x_l1)^2;
+        results_noise_l1(j, noise_index) = norm(x0-x_l1)^2;
         
         % P1 method
         x_p1 = p1_method(Ai, bi, n, k);
-        results_noise(j, 3) = norm(x0-x_p1)^2;
+        results_noise_p1(j, noise_index) = norm(x0-x_p1)^2;
         
         % P2(1) method
         x_p2_1 = p2_1_method(Ai, bi, n, k, x_p1, delta);
-        results_noise(j, 4) = norm(x0-x_p2_1)^2;
+        results_noise_p2_1(j, noise_index) = norm(x0-x_p2_1)^2;
     end
-    % calculate mse for each SNR
-    results_mse(noise_index, :) = mean(results_noise, 1);
 end
+
+results_mse(:,1) = mean(results_noise_ls, 1);
+results_mse(:,2) = mean(results_noise_l1, 1);
+results_mse(:,3) = mean(results_noise_p1, 1);
+results_mse(:,4) = mean(results_noise_p2_1, 1);
 
 % plot data and add pretty stuff
 semilogy(results_mse, '.-', 'MarkerSize',20, 'LineWidth', 1.5)
