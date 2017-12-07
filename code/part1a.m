@@ -36,7 +36,7 @@ for s_index = 1:length(reliable_sensors_list)
         bi = zeros(m, 1, k);
 
         % unknown vector is modeled as x0 ~ N(0, n^(-1/2)In)
-        x0 = mvnrnd(zeros(1, n), n^(-0.5)*eye(n))';
+        x0 = mvnrnd(zeros(1, n), n^(-1)*eye(n))';
 
         % Entries of matrix A are drawn independently from N(0, 1)
         Ai = randn(m, n, k);

@@ -34,14 +34,14 @@ for noise_index = 1:length(noise_levels_sigma)
         bi = zeros(m, 1, k);
 
         % unknown vector is modeled as x0 ~ N(0, n^(-1/2)In)
-        x0 = mvnrnd(zeros(1, n), n^(-0.5)*eye(n))';
+        x0 = mvnrnd(zeros(1, n), n^(-1)*eye(n))';
 
         % Entries of matrix A are drawn independently from N(0, 1)
         Ai = randn(m, n, k);
 
         for i=1:s
             % reliable sensors measures
-            vi = mvnrnd(zeros(1, m), ((noise_sigma^2))*eye(m))';
+            vi = mvnrnd(zeros(1, m), (noise_sigma^2)*eye(m))';
             bi(:, :, i) = Ai(:, : ,i)*x0 + vi;
         end
 
