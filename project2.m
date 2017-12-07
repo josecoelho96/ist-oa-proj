@@ -40,3 +40,6 @@ x_ls = ls_method(A, b, n);
 
 % l1 method
 x_l1 = l1_method(A, b, n);
+
+% P1 method
+x_p1 = p1_method(Ai, bi, n, k);
