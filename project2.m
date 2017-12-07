@@ -10,6 +10,11 @@
 close all;
 clear;
 
+save_folder = 'results/no_noise/';
+save_str = [datestr(now,'dd-mm-yy','local'),'_',datestr(now,'hh-MM-ss','local')];
+diary([save_folder, 'log_', save_str, '.txt'])
+tic;
+
 % Setting parameters:
 k = 16; % Number of sensors
 m = 4; % Size of observation vectors b
@@ -25,9 +30,15 @@ results = zeros(methods, length(reliable_sensors_list));
 %preallocations
 bi = zeros(m, 1, k);
 
+fprintf('Realizing %d Monte Carlo simulations without noise. ', MCexperiments);
+toc;
+
 for s_index = 1:length(reliable_sensors_list)
     
     s = reliable_sensors_list(s_index);
+    
+    fprintf('Considered %d reliable sensors. ', s);
+    toc;
     
     for j=1:MCexperiments
         
@@ -92,3 +103,8 @@ t = uitable(f,'Data',results,...
 % Set width and height
 t.Position(3) = t.Extent(3);
 t.Position(4) = t.Extent(4);
+
+print([save_folder, 'table_', save_str], '-dpng');
+save([save_folder, 'workspace_', save_str]);
+toc
+diary off
