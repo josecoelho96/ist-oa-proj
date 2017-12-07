@@ -10,7 +10,7 @@
 close all;
 clearvars -except MCexperiments;
 
-save_folder = 'results/noise/';
+save_folder = '../results/noise/';
 save_str = [datestr(now,'dd-mm-yy','local'),'_',datestr(now,'hh-MM-ss','local')];
 diary([save_folder, 'log_', save_str, '.txt'])
 tic;
