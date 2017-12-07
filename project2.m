@@ -29,3 +29,11 @@ end
 for i=s+1:k
     bi(:, : , i) = mvnrnd(zeros(1, m), eye(m))';
 end
+
+% Rearrange arrays and matrices
+b = bi(:);
+C = permute(Ai, [1 3 2]);
+A = reshape(C, [], size(Ai, 2), 1);
+
+% LS method
+x_ls = ls_method(A, b, n);
