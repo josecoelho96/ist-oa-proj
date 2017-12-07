@@ -7,10 +7,9 @@
 % Gonçalo Pereira, 81602
 
 % Number of Monte Carlo experiments
-MCexperiments = 10;
+MCexperiments = 1000;
 % Part1 : simulations without noise
 part1a
 
-MCexperiments = 10;
 % Part1 : simulations with noise
 part1b

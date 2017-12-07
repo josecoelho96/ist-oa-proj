@@ -1,0 +1,11 @@
+Realizing 1000 Monte Carlo simulations without noise. Elapsed time is 0.000814 seconds.
+Considered 6 reliable sensors. Elapsed time is 0.002374 seconds.
+Considered 8 reliable sensors. Elapsed time is 411.628381 seconds.
+Considered 10 reliable sensors. Elapsed time is 823.387310 seconds.
+Considered 12 reliable sensors. Elapsed time is 1324.825179 seconds.
+Considered 14 reliable sensors. Elapsed time is 1763.909241 seconds.
+[Warning: Figure is saved in ../results/no_noise/workspace_07-12-17_09-53-05.mat. Saving graphics handle variables can cause the
+creation of very large files. To save graphics figures, use <a  href="matlab:helpview([docroot,'/techdoc/ref/savefig.html'])">savefig</a>.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('part1a', 'C:\users\jose_\Documents\College\ist-oa-proj\code\part1a.m', 112)" style="font-weight:bold">part1a</a> (<a href="matlab: opentoline('C:\users\jose_\Documents\College\ist-oa-proj\code\part1a.m',112,0)">line 112</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('project2', 'C:\users\jose_\Documents\College\ist-oa-proj\code\project2.m', 12)" style="font-weight:bold">project2</a> (<a href="matlab: opentoline('C:\users\jose_\Documents\College\ist-oa-proj\code\project2.m',12,0)">line 12</a>)] 
+Elapsed time is 2218.193492 seconds.
