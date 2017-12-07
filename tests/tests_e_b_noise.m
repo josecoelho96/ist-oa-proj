@@ -7,11 +7,11 @@ n=20;
 k=16;
 
 % SNR = 10*log10(sigma^(-2))
-SNR = 15;
+SNR = 5;
 % sigma = 10^(-SNR/20)
 sigma = 10^(-SNR/20);
 
-total = 10000000;
+total = 100000;
 
 norm_bi_r = zeros(total, 1);
 norm_bi_r_opt2 = zeros(total, 1);
