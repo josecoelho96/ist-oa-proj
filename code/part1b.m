@@ -96,7 +96,7 @@ ax = gca;
 ax.XTick = [1 2 3 4 5];
 ax.XTickLabel = SNR;
 grid on;
-print([save_folder, 'table_', save_str], '-dpng');
+print([save_folder, 'mse_performance_', save_str], '-dpng');
 save([save_folder, 'workspace_', save_str]);
 toc
 diary off
