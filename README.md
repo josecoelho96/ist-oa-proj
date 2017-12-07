@@ -7,11 +7,14 @@
 
 ### Details
 Fall Semester of 2017/2018.
+
 Development using MATLAB and [CVX].
 
 ### Authors
 José Coelho
+
 Miguel de Moura
+
 Gonçalo Pereira
 
    [CVX]: <http://cvxr.com/>
