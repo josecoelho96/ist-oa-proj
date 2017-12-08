@@ -24,9 +24,6 @@ This command might be helpful if a parallel pool cannot be started.
 distcomp.feature( 'LocalUseMpiexec', false )
 ```
 
-
-
-
 ### Authors
 José Coelho
 
