@@ -14,7 +14,7 @@ n = 20; % Size of unknown vector x
 reliable_sensors_list = [6 8 10 12 14]; % Number of consistent sensors
 delta = 1e-6; % Concave approximation related constant
 threshold = 1e-4; % Threshold to recover reliable sensors
-methods = 4; % Methods being studied ( LS, l1, P1, P2(1) )
+methods = 5; % Methods being studied ( LS-GA, LS, l1, P1, P2(1) )
 
 % save results
 results = zeros(methods, length(reliable_sensors_list));
@@ -55,12 +55,18 @@ for s_index = 1:length(reliable_sensors_list)
         b = bi(:);
         C = permute(Ai, [1 3 2]);
         A = reshape(C, [], size(Ai, 2), 1);
+        b_ga = b(1:m*s);
+        A_ga = A(1:m*s,:)
 
+        % LS-GA method
+        x_ls_ga = ls_method(A_ga, b_ga, n);
+        sensor_results_ls_ga = sensor_validation(Ai, bi, x_ls_ga, threshold, k, s);
+        results_ls_ga(j, s_index) = isequal(reliable_sensors, sensor_results_ls_ga);
+        
         % LS method
         x_ls = ls_method(A, b, n);
         sensor_results_ls = sensor_validation(Ai, bi, x_ls, threshold, k, s);
         results_ls(j, s_index) = isequal(reliable_sensors, sensor_results_ls);
-
 
         % l1 method
         x_l1 = l1_method(A, b, n);
@@ -79,17 +85,18 @@ for s_index = 1:length(reliable_sensors_list)
     end
 end
 
-results(1,:) = sum(results_ls, 1);
-results(2,:) = sum(results_l1, 1);
-results(3,:) = sum(results_p1, 1);
-results(4,:) = sum(results_p2_1, 1);
+results(1,:) = sum(results_ls_ga, 1);
+results(2,:) = sum(results_ls, 1);
+results(3,:) = sum(results_l1, 1);
+results(4,:) = sum(results_p1, 1);
+results(5,:) = sum(results_p2_1, 1);
 results = (results./MCexperiments).*100;
 
 % Print results
 f = figure('Position',[440 500 500 140]);
 % Create the column and row names in cell arrays
 cnames = {'s=6','s=8','s=10', 's=12', 's=14'};
-rnames = {'LS','L1','P1', 'P2(1)'};
+rnames = {'LS-GA', 'LS','L1','P1', 'P2(1)'};
 
 % Create the uitable
 t = uitable(f,'Data',results,...
