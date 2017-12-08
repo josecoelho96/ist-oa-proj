@@ -1,3 +1,4 @@
 code/*.asv
 results/**/*.mat
 results/**/*.txt
+*.zip
