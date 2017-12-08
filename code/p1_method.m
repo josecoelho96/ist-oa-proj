@@ -5,7 +5,7 @@ function [ x ] = p1_method( A, b, n, k )
         % define cost function
         f = 0;
         for i=1:k
-            f = f + norm(b(:, :, i) - A(:, :, i)*x);
+            f = f + norm( b(:, :, i) - A(:, :, i)*x );
         end
         minimize(f)
     cvx_end
