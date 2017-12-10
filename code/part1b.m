@@ -55,6 +55,13 @@ for noise_index = 1:length(noise_levels_sigma)
         C = permute(Ai, [1 3 2]);
         A = reshape(C, [], size(Ai, 2), 1);
 
+        b_ga = b(1:m*s);
+        A_ga = A(1:m*s,:)
+
+        % LS-GA method
+        x_ls_ga = ls_method(A_ga, b_ga, n);
+        results_noise_ls_ga(j, noise_index) = norm(x0-x_ls_ga)^2;
+                
         % LS method
         x_ls = ls_method(A, b, n);
         results_noise_ls(j, noise_index) = norm(x0-x_ls)^2;
@@ -73,17 +80,18 @@ for noise_index = 1:length(noise_levels_sigma)
     end
 end
 
-results_mse(:,1) = mean(results_noise_ls, 1);
-results_mse(:,2) = mean(results_noise_l1, 1);
-results_mse(:,3) = mean(results_noise_p1, 1);
-results_mse(:,4) = mean(results_noise_p2_1, 1);
+results_mse(:,1) = mean(results_noise_ls_ga, 1);
+results_mse(:,2) = mean(results_noise_ls, 1);
+results_mse(:,3) = mean(results_noise_l1, 1);
+results_mse(:,4) = mean(results_noise_p1, 1);
+results_mse(:,5) = mean(results_noise_p2_1, 1);
 
 % plot data and add pretty stuff
 semilogy(results_mse, '.-', 'MarkerSize',20, 'LineWidth', 1.5)
 title('MSE variation with SNR')
 xlabel('SNR [dB]')
 ylabel('MSE')
-legend('LS', 'L_1', 'P_1', 'P_2(1)', 'Location', 'southwest');
+legend('LS-GA', 'LS', 'L_1', 'P_1', 'P_2(1)', 'Location', 'southwest');
 ax = gca;
 ax.XTick = [1 2 3 4 5];
 ax.XTickLabel = SNR;
