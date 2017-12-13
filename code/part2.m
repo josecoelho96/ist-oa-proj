@@ -10,7 +10,7 @@ k = 16; % Number of sensors
 m = 4; % Size of observation vectors b
 n = 20; % Size of unknown vector x
 reliable_sensors_list = [6 8 10 12 14]; % Number of consistent sensors
-restriction_delta = 10^-10;
+restriction_delta = 10^-12;
 threshold = 10^-4;
 MCexperiments = 1000;
 
@@ -48,25 +48,7 @@ for s_index = 1:length(reliable_sensors_list)
         for i=s+1:k
             bi(:, : , i) = mvnrnd(zeros(1, m), eye(m))';
         end
-
-        % % CVX problem solving
-        % cvx_begin quiet
-        %     variable x(n, k)
-        %     variable L(n, 1)
-        %     % define cost function
-        %     for i=1:k
-        %         % f(i) = (x(:,i)-L)'*(x(:,i)-L);
-        %         f(i) = norm(x(:,i)-L);
-        %     end
-        %     minimize(sum(f))
-        %     subject to
-        %     for i=1:k
-        %         norm(bi(:,:,i) - Ai(:,:,i)*x(:,i)) <= restriction_delta;
-        %         % (bi(:,:,i)-Ai(:,:,i)*x(:,i))'*(bi(:,:,i)-Ai(:,:,i)*x(:,i)) <= restriction_delta;
-        %     end
-        % cvx_end
-
-
+        
         x0 = randn(n, k) / sqrt(n);
         L0 = mean(x0, 2);
 
