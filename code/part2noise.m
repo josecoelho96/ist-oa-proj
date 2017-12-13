@@ -15,7 +15,7 @@ noise_levels_sigma = (10.^(-SNR/20));
 restriction_delta = 10^-10;
 threshold = 10^-4;
 
-MCexperiments = 100;
+MCexperiments = 1000;
 
 fprintf('Realizing %d Monte Carlo simulations with noise.\n', MCexperiments);
 
