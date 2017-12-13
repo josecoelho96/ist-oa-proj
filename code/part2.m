@@ -58,9 +58,7 @@ for s_index = 1:length(reliable_sensors_list)
         method_reliable_sensors = sensor_validation( Ai, bi, lambda_est, threshold, k, s);
 
         list_results(j, s_index) = isequal(reliable_sensors, method_reliable_sensors);
-
     end
-
 end
 
 results = sum(list_results, 1);
